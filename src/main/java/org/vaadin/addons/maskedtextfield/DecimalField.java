@@ -86,10 +86,12 @@ public class DecimalField extends TextField {
 	@SuppressWarnings("rawtypes")
 	@Override
 	public void setPropertyDataSource(Property newDataSource) {
-		if(!Number.class.isAssignableFrom(newDataSource.getType())) {
-			throw new IllegalArgumentException("This field is compatible with number datasources only");
+		if(newDataSource != null) {
+			if(!Number.class.isAssignableFrom(newDataSource.getType())) {
+				throw new IllegalArgumentException("This field is compatible with number datasources only");
+			}
+			super.setPropertyDataSource(newDataSource);
 		}
-		super.setPropertyDataSource(newDataSource);
 	}
 
 	/**
@@ -122,10 +124,9 @@ public class DecimalField extends TextField {
 			}
 		}
 		
+		
 		@Override
-		public Number convertToModel(String value,
-	            Class<? extends Number> targetType, Locale locale)
-	                    throws ConversionException {
+		public Number convertToModel(String value, Class<? extends Number> targetType, Locale locale) throws ConversionException {
 			refreshFormatter();
 			try {
 				if(value == null || value.trim().isEmpty()) {
@@ -140,10 +141,13 @@ public class DecimalField extends TextField {
 				return Utils.convertToDataSource(new Double(0.0), getPropertyDataSource());
 			}
 		}
-		
+
 		@Override
-		public String convertToPresentation(Number value, java.lang.Class<? extends String> targetType, Locale locale) throws com.vaadin.data.util.converter.Converter.ConversionException {
-			return formatter.format(value);
+		public String convertToPresentation(Number value, Class<? extends String> targetType, Locale locale) throws ConversionException {
+			if(value != null) {
+				return formatter.format(value);
+			}
+			return null;
 		}
 
 	}
