@@ -123,7 +123,9 @@ public class DecimalField extends TextField {
 		}
 		
 		@Override
-		public Number convertToModel(String value, Locale locale) throws ConversionException {
+		public Number convertToModel(String value,
+	            Class<? extends Number> targetType, Locale locale)
+	                    throws ConversionException {
 			refreshFormatter();
 			try {
 				if(value == null || value.trim().isEmpty()) {
@@ -138,9 +140,9 @@ public class DecimalField extends TextField {
 				return Utils.convertToDataSource(new Double(0.0), getPropertyDataSource());
 			}
 		}
-
+		
 		@Override
-		public String convertToPresentation(Number value, Locale locale) throws ConversionException {
+		public String convertToPresentation(Number value, java.lang.Class<? extends String> targetType, Locale locale) throws com.vaadin.data.util.converter.Converter.ConversionException {
 			return formatter.format(value);
 		}
 
