@@ -8,7 +8,6 @@ import org.vaadin.addons.maskedtextfield.shared.Utils;
 
 import com.vaadin.data.Property;
 import com.vaadin.data.util.converter.Converter;
-import com.vaadin.data.util.converter.StringToNumberConverter;
 import com.vaadin.ui.TextField;
 
 /**
@@ -126,7 +125,7 @@ public class MaskedTextField extends TextField {
 	 * @author Eduardo Frazao
 	 *
 	 */
-	private class MaskNumberConverter extends StringToNumberConverter {
+	private class MaskNumberConverter extends DefaultStringToNumberConverter {
 
 		private static final long serialVersionUID = 1L;
 		
